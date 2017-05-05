@@ -1,0 +1,35 @@
+.mybtn{
+    width: 12%;
+    line-height: 32px;
+    margin-left: 25%;
+
+}
+
+
+.txt_choice{
+    width: 50%;
+    margin-left: 25%;
+}
+
+
+.mycontainer{
+    text-align: center;
+    margin-top: 1%;
+}
+.mydiv{
+    margin-top: 1%;
+}
+.secdiv{
+    margin-top: 1%;
+}
+
+button{
+    width: 13%;
+    line-height: 32px;
+    margin-left: 25%;
+}
+
+.error{
+    color:red;
+    margin-left: 25%;
+}

@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title %}
+    
+    {% endblock %}
+    </title>
+<link href="{% static 'boots/css/bootstrap.min.css' %}" rel="stylesheet">
+{% block style %}
+
+{% endblock %}
+</head>
+<body>
+
+<div class="container">
+{% block content %}
+
+{% endblock %}
+</div>
+
+<script type="text/javascript" src="{% static 'boots/js/jquery_3.1.js'%}"></script>
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

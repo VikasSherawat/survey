@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home
+{% endblock %}
+{% block style %}
+    <style>
+    .mybtn{
+    height:50px;
+    width: 100px;
+    line-height: 32px;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container" style="text-align: center">
+        <div class="row">
+            <h1 class="lead">Create Polls or Survey</h1>
+            <div class="form-group">
+                <a href="{% url 'polls:index' %}" role="button" class="btn btn-primary mybtn">Polls</a>
+                <a href="{% url 'survey:index' %}" role="button" class="btn btn-success mybtn">Survey</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
