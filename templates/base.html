@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,7 @@
 </div>
 
 <script type="text/javascript" src="{% static 'boots/js/jquery_3.1.js'%}"></script>
+<script type="text/javascript" src="{% static 'createpolls/js/base.js'%}"></script>
 {% block script %}
 
 {% endblock %}

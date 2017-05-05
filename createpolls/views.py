@@ -8,6 +8,7 @@ from util import EmailThread
 from .models import Question, Choice
 
 from django.contrib import messages
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -40,13 +41,9 @@ def index(request):
                 c.question =q
                 c.choice = choice
                 c.save()
-        #send link for people to vote
         try:
             q.save()
-            #send_html_mail(to,request.get_full_path()+q.q_num)
         except:
-            messages.error(request,'Error occured in saving poll')
-            #raise Http404("Error occured in saving poll")
             return render(request, 'createpolls/createpoll.html')
         else:
             return HttpResponseRedirect(reverse('polls:detail',args=[q.q_num]))
@@ -62,19 +59,22 @@ def detail(request,q_num):
 
 
 def vote(request,q_num):
-    context = {}
     q = get_object_or_404(Question, q_num=q_num)
     try:
-        selected_choice = q.choice_set.get(pk= request.POST['choice'])
+        selected_choice = q.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
-        messages.error(request, "You didn't select a choice.")
         return render(request, 'createpolls/polldetails.html', {
             'question': q,
-            'error_message': "You didn't select a choice.",
+            'error_message': "You didn't select a choice123.",
         })
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        context = {}
+        context['url'] = reverse('polls:result', args=[q_num])
+    if request.POST:
+        return JsonResponse(context)
+    else:
         return HttpResponseRedirect(reverse('polls:result',args=[q_num]))
 
 

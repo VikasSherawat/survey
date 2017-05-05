@@ -5,14 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    {% if error_message %}<p class="alert alert-danger" style="margin-top: 3%">{{ error_message }}</p>{% endif %}
+    {% if error_message %}<p class="alert alert-danger">{{ error_message }}</p>{% endif %}
     <p class="lead">{{ question.question }}</p>
-    <form action="{% url 'polls:vote' question.q_num %}" method="post">
-        {% csrf_token %}
+    {#    <form action="{% url 'polls:vote' question.q_num %}" method="post">#}
+    <div class="row">
+    <input type="hidden" id="q_num" name="variable" value="{{ question.q_num}}">
         {% for choice in question.choice_set.all %}
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
             <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
         {% endfor %}
-        <input type="submit" value="Vote" class="btn btn-primary" />
-    </form>
+        <input id="save" type="button" value="Vote" class="btn btn-primary" />
+    </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'createpolls/js/vote.js' %}"></script>
 {% endblock %}

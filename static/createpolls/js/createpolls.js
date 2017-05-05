@@ -1,7 +1,5 @@
 numTextBox = 4;
 $(document).ready(function(){
-    var csrf = jQuery("[name=csrfmiddlewaretoken]").val();
-    console.log(csrf);
     registerInput();
     hideDivision();
 });
