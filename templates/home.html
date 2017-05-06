@@ -6,12 +6,16 @@
 {% endblock %}
 {% block style %}
     <style>
-    .mybtn{
-    height:50px;
-    width: 100px;
-    line-height: 32px;
-    }
+        .mybtn{
+            height:50px;
+            width: 100px;
+            line-height: 32px;
+        }
     </style>
+{% endblock %}
+{% block headScript %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
 {% endblock %}
 {% block content %}
     <div class="container" style="text-align: center">
@@ -19,11 +23,17 @@
             <h1 class="lead">Create Polls or Survey</h1>
             <div class="form-group">
                 <a id="btn_poll" href="{% url 'polls:index' %}" role="button" class="btn btn-primary mybtn">Polls</a>
-                <a id="btn_survey" href="{% url 'survey:index' %}" role="button" class="btn btn-success mybtn">Survey</a>
+                <a id="btn_survey"  role="button" class="btn btn-success mybtn">Survey</a>
+{#                href="{% url 'survey:index' %}"#}
             </div>
+        </div>
+        <input type="hidden" />
+        <div class="row" id="chart_div">
+
         </div>
     </div>
 {% endblock %}
 {% block script %}
-
+    <script type="text/javascript" src="{% static 'createpolls/js/home.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
 {% endblock %}

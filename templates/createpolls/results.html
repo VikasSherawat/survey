@@ -1,17 +1,40 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}
-Poll result
+    Poll result
+{% endblock %}
+{% block headScript %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>
 {% endblock %}
 {% block content %}
-<div>
-{% if question %}
-    <p class="lead">{{ question.question }}</p>
-    <ul>
-        {% for choice in question.choice_set.all %}
-            <li>{{ choice.choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-        {% endfor %}
-    </ul>
-        <a href="{% url 'polls:detail' question.q_num%}">Vote Again?</a>
-{% endif %}
-</div>
+    <div class="container col-lg-6 col-lg-offset-1" style="margin-top: 5%">
+        {% if question %}
+            <h1>Question.</h1>
+            <p class="lead">{{ question.question}}</p>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Choice</th>
+                    <th>Vote(s)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for choice in question.choice_set.all %}
+                    <tr>
+                        <td>{{ choice.choice }}</td>
+                        <td>{{ choice.votes }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <input type="hidden" id="q_num" value="{{ question.q_num }}">
+        {% endif %}
+
+    </div>
+    <div class="col-lg-4" id="chart_div">
+
+    </div>
+    <br>
+
 {% endblock %}

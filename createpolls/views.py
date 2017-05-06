@@ -34,7 +34,7 @@ def index(request):
         q.save()
         for i in range(1,21):
             choice = request.POST.get('textbox'+str(i))
-            if choice is None or len(choice)==0:
+            if choice is None or len(choice) == 0:
                 break
             else:
                 c = Choice()
@@ -46,6 +46,7 @@ def index(request):
         except:
             return render(request, 'createpolls/createpoll.html')
         else:
+            send_html_mail(to,reverse('polls:detail',args=[q.q_num]))
             return HttpResponseRedirect(reverse('polls:detail',args=[q.q_num]))
 
     return render(request,'createpolls/createpoll.html')
@@ -83,3 +84,18 @@ def result(request,q_num):
     context = dict()
     context['question'] = q
     return render(request,'createpolls/results.html',context)
+
+
+def chart(request,q_num):
+    q = get_object_or_404(Question, q_num=q_num)
+    context = dict()
+    choice_set = q.choice_set.all()
+    values = []
+    for obj in choice_set:
+        ls = []
+        ls.append(obj.choice)
+        ls.append(obj.votes)
+        values.append(ls)
+    context['values'] = values
+    context['question'] = q.question
+    return JsonResponse(context)

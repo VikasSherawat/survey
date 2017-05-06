@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^(?P<q_num>[0-9A-Za-z]+)/$', views.detail, name='detail'),
     url(r'^(?P<q_num>[0-9A-Za-z]+)/vote/$', views.vote, name='vote'),
     url(r'^(?P<q_num>[0-9A-Za-z]+)/result/$', views.result, name='result'),
+    url(r'^(?P<q_num>[0-9A-Za-z]+)/chart/$', views.chart, name='chart'),
 ]

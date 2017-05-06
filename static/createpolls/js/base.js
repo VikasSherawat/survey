@@ -9,6 +9,5 @@ $.ajaxSetup({
 
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
-    console.log("Inside ajaxSetup");
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }

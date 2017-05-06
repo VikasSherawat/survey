@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'crispy_forms',
     'django.contrib.sites',
+    'googlecharts',
 ]
 
 MIDDLEWARE = [
