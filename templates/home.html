@@ -6,16 +6,18 @@
 {% endblock %}
 {% block style %}
     <style>
+
         .mybtn{
             height:50px;
             width: 100px;
             line-height: 32px;
         }
     </style>
+    <link href="http://designers.hubspot.com/hs-fs/hub/327485/file-2054199286-css/font-awesome.css" rel="stylesheet">
 {% endblock %}
 {% block headScript %}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-{#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
+    {#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
 {% endblock %}
 {% block content %}
     <div class="container" style="text-align: center">
@@ -24,9 +26,19 @@
             <div class="form-group">
                 <a id="btn_poll" href="{% url 'polls:index' %}" role="button" class="btn btn-primary mybtn">Polls</a>
                 <a id="btn_survey"  role="button" class="btn btn-success mybtn">Survey</a>
-{#                href="{% url 'survey:index' %}"#}
+                {#                href="{% url 'survey:index' %}"#}
             </div>
         </div>
+        <p><strong>-- OR Sign In With--</strong></p>
+        <a class="btn btn-social-icon btn-github" href="{% url 'social:begin' 'github' %}">
+            <span class="fa fa-github"></span>
+        </a>
+        <a class="btn btn-social-icon btn-facebook" href="{% url 'social:begin' 'facebook' %}">
+            <span class="fa fa-facebook"></span>
+        </a>
+        <a class="btn btn-social-icon btn-google" href="{% url 'googlelogin' %}">
+            <span class="fa fa-google"></span>
+        </a>
         <input type="hidden" />
         <div class="row" id="chart_div">
 
@@ -35,5 +47,5 @@
 {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{% static 'createpolls/js/home.js' %}"></script>
-{#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
+    {#    <script type="text/javascript" src="{% static 'createpolls/js/chart.js' %}"></script>#}
 {% endblock %}

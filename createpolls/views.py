@@ -1,14 +1,15 @@
-from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, Http404
+from django.http import JsonResponse
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from polls import settings
 from util import EmailThread
 from .models import Question, Choice
 
-from django.contrib import messages
-from django.http import JsonResponse
+from oauth2client import client
+
 # Create your views here.
 
 
@@ -99,3 +100,4 @@ def chart(request,q_num):
     context['values'] = values
     context['question'] = q.question
     return JsonResponse(context)
+

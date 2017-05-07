@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'crispy_forms',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'googlecharts',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,8 +52,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'polls.urls'
@@ -68,10 +72,21 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'polls.wsgi.application'
 
@@ -130,6 +145,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+#Login Details
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'polls:index'
+
 #email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -151,3 +171,16 @@ except:
 
 #csrf token
 CSRF_USE_SESSIONS= True
+
+#SOCIAL_AUTH TOKENS
+#GITHUB
+SOCIAL_AUTH_GITHUB_KEY = '9adc0ca67f746bb1d02a'
+SOCIAL_AUTH_GITHUB_SECRET = '6a30cd8a2e4757795466439e18769e1448477587'
+
+#FACEBOOK
+SOCIAL_AUTH_FACEBOOK_KEY = '111422776097355'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'fbe01afb883a944e8ba376dd99d22ab1'  # App Secret
+
+#GOOGLE
+SOCIAL_AUTH_GOOGLE_KEY = '613126827256-9mqrk11ddifgqo93b6cfdvs2d6h9a2jc.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_SECRET = 'go6iM9dPJFekbDxDDLh9ShQp'
